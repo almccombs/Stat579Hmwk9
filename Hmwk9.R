@@ -43,5 +43,21 @@ rm(list = ls())
 
 #Problem 4
 
+order.matrix <- function(mymat) {
+ordvec <- sort(mymat)
+indrow <- (rep(NA, length(ordvec)))
+indcol <- (rep(NA, length(ordvec)))
+for (i in 1:length(ordvec)) {
+  rowcol <- which(mymat == ordvec[i], arr.ind = TRUE)
+  indrow[i] <- rowcol[1,1]
+  indcol[i] <- rowcol[1,2]
+}
+values <- data.frame(number = ordvec, rowindex = indrow, colindex = indcol)
+return(values)
+}
 
+mymat <- matrix(rchisq(12, 1), nrow = 4)
+order.matrix(mymat)
 
+mymat <- matrix(rchisq(20, 1), nrow = 5)
+order.matrix(mymat)
