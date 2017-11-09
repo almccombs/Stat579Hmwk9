@@ -90,21 +90,19 @@ x <- seq(from = 0, to = 10, by = 2)
 polaroid(x)
 
   #Problem 5.b
-normalize <- function(mymat) {
-  divisor <- rowSums(mymat)
-  for (r in 1:nrow(mymat)) {
-    for (c in 1:ncol(mymat)) {
-      mymat[r,c] <- mymat[r,c]/divisor[r]
-    }
-  }
-  return(mymat)
+normalize <- function(vec) {
+  den <- sqrt(sum(vec^2))
+  output <- vec/den
 }
 
-mymat <- matrix(5:13, nrow = 3)
-normalize(mymat)
+zt <- apply(mymat, 1, normalize)
+z <- t(z)
+
+sum(z[3,]^2) == 1
 
   #Problem 5.c
-
-
+mymat <- matrix(rnorm(5000, mean = 0, sd = 1), nrow = 1000, ncol = 5)
+z <- normalize2(mymat)
+ks.test(z,"punif",min=-1,max=1)
 
 
