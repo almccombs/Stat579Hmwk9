@@ -54,8 +54,8 @@ ks.test(polars[,4], "punif", min = 0, max = pi)
 ks.test(polars[,5], "punif", min = 0, max = pi)
 
 #Multiple distributions
-par(mfrow = c(2,2))
-for (i in 1:4) {
+par(mfrow = c(3,3))
+for (i in 1:9) {
   y <- matrix(rnorm(5000, mean = 0, sd = 1), nrow = 1000, ncol = 5)
   zt <- apply(y, 1, normalize)
   z <- t(zt)
