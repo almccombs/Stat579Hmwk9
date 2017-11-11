@@ -46,4 +46,36 @@ loglik(ghm, derghm, -2.7, 0.00001, 100, x)
 
 #Problem 7
 
+  #Problem 7.a
+men <- rnorm(n = 100, mean = 125, sd =  25)
+women <- rnorm(n = 100, mean = 125, sd = 15)
+t0 <- data.frame(M = men, W = women)
+head(t0)
+
+  #Problem 7.b
+permute <- function(t0, iter) {
+  t <- as.list(rep(NA, iter))
+  output <- as.list(rep(NA, iter))
+  ttemp <- t0
+  for (i in 1:iter) {
+    t[[i]] <- data.frame(M = sample(x = ttemp$M, 100), W = ttemp$W)
+    output[[i]] <- apply(t[[i]], 1, mean)
+    ttemp <- data.frame(M = output[[i]], W = output[[i]])
+  }
+  return(output)
+}
+
+  #Problem 7.c
+library(ggplot2)
+library(reshape2)
+
+heights <- permute(t0, 9)
+heights <- as.data.frame(heights)
+names(heights) <- paste("G", 1:9, sep = "")
+head(heights)
+heights <- melt(heights)
+names(heights) <- c("gen", "height")
+head(heights)
+
+ggplot(heights, aes(x=height)) + geom_histogram(binwidth = 1) + facet_wrap(~ gen)
 
